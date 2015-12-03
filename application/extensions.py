@@ -11,3 +11,7 @@ migrate = Migrate()
 
 from application.models import APIScaffold
 api_scaffold = APIScaffold()
+
+from flask_httpauth import HTTPBasicAuth
+
+auth = HTTPBasicAuth()

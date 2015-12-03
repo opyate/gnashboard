@@ -7,8 +7,11 @@ from application.extensions import (
     db,
     migrate,
     api_scaffold,
+    auth,
 )
-
+from application import (
+    misc_blueprint
+)
 
 def create_app(config_object=ProdConfig):
     """An application factory, as explained here:
@@ -26,9 +29,10 @@ def create_app(config_object=ProdConfig):
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
-    api_scaffold.init_app(app, db)
+    api_scaffold.init_app(app, db, auth)
     return None
 
 
 def register_blueprints(app):
+    app.register_blueprint(misc_blueprint.views.blueprint)
     return None
