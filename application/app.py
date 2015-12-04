@@ -10,7 +10,8 @@ from application.extensions import (
     auth,
 )
 from application import (
-    misc_blueprint
+    misc_blueprint,
+    pages_blueprint,
 )
 
 def create_app(config_object=ProdConfig):
@@ -35,4 +36,5 @@ def register_extensions(app):
 
 def register_blueprints(app):
     app.register_blueprint(misc_blueprint.views.blueprint)
+    app.register_blueprint(pages_blueprint.views.blueprint)
     return None

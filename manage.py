@@ -8,6 +8,7 @@ from application.app import create_app
 from application.settings import DevConfig, ProdConfig
 from application.models.foo import Foo
 from application.models.basket import Basket
+from application.models.page import Page
 from application.extensions import db
 
 if os.environ.get("APPLICATION_ENV") == 'prod':
@@ -25,7 +26,13 @@ def _make_context():
     """Return context dict for a shell session so you can access
     app, db and the Foo model by default.
     """
-    return {'app': app, 'db': db, 'Foo': Foo, 'Basket': Basket}
+    return {
+        'app': app,
+        'db': db,
+        'Foo': Foo,
+        'Basket': Basket,
+        'Page': Page
+    }
 
 
 @manager.command
