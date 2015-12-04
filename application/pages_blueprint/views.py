@@ -8,17 +8,18 @@ from ..models.page import Page
 blueprint = Blueprint(
     'pages',
     __name__,
-    template_folder='templates')
+    template_folder='templates',
+    url_prefix='/pages')
 
 TMPL = "<li><a href='/pages/{0}'>{0}</a></li>"
 
-@blueprint.route('/pages')
+@blueprint.route('/')
 def pages():
     query = db.session.query(Page.name.distinct().label("name"))
     names = [TMPL.format(row.name) for row in query.all()]
     return "".join(names), 200
 
-@blueprint.route('/pages/<string:name>')
+@blueprint.route('/<string:name>')
 def page_by_name(name=None):
     if name:
         page = Page.query \
