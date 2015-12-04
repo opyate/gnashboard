@@ -92,9 +92,9 @@ Supports `GET`, `POST`, `PUT`, `DELETE`.
 
 Read-only alternative API for Key-value store.
 
-## [/latest/kv/<key>](http://localhost:5000/latest/kv/<key>)
+## [/latest/kv/{key}](http://localhost:5000/latest/kv/{key})
 
-Same as above, by key.
+Same as above, by `key`.
 
 ## [/page](http://localhost:5000/page)
 
@@ -105,6 +105,6 @@ Supports `GET`, `POST`, `PUT`, `DELETE`.
 
 Read-only alternative API for Page store.
 
-## [/latest/page/<name>](http://localhost:5000/latest/page/<name>)
+## [/latest/page/{name}](http://localhost:5000/latest/page/{name})
 
-Same as above, by name.
+Same as above, by `name`.
