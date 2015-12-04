@@ -74,3 +74,37 @@ This will generate a new migration script. Then run:
 To apply the migration.
 
 For a full migration command reference, run ``python manage.py db --help``.
+
+# API
+
+Assuming a server running on [localhost:5000](http://localhost:5000):
+
+## [/](http://localhost:5000/)
+
+Root. Nothing here.
+
+## [/kv](http://localhost:5000/kv)
+
+Key-value store.
+Supports `GET`, `POST`, `PUT`, `DELETE`.
+
+## [/latest/kv](http://localhost:5000/latest/kv)
+
+Read-only alternative API for Key-value store.
+
+## [/latest/kv/<key>](http://localhost:5000/latest/kv/<key>)
+
+Same as above, by key.
+
+## [/page](http://localhost:5000/page)
+
+Page store.
+Supports `GET`, `POST`, `PUT`, `DELETE`.
+
+## [/latest/page](http://localhost:5000/latest/page)
+
+Read-only alternative API for Page store.
+
+## [/latest/page/<name>](http://localhost:5000/latest/page/<name>)
+
+Same as above, by name.

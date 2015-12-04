@@ -5,18 +5,20 @@ from ..extensions import auth, db
 from ..models.page import Page
 
 
+ROOT = '/latest/page'
+
 blueprint = Blueprint(
     'pages',
     __name__,
     template_folder='templates',
-    url_prefix='/pages')
+    url_prefix=ROOT)
 
-TMPL = "<li><a href='/pages/{0}'>{0}</a></li>"
+TMPL = "<li><a href='{0}/{1}'>{1}</a></li>"
 
 @blueprint.route('/')
 def pages():
     query = db.session.query(Page.name.distinct().label("name"))
-    names = [TMPL.format(row.name) for row in query.all()]
+    names = [TMPL.format(ROOT, row.name) for row in query.all()]
     return "".join(names), 200
 
 @blueprint.route('/<string:name>')

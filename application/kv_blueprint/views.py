@@ -7,10 +7,10 @@ from ..models.kv import KV
 
 
 blueprint = Blueprint(
-    'keys',
+    'kv',
     __name__,
     template_folder='templates',
-    url_prefix='/keys')
+    url_prefix='/latest/kv')
 
 
 @blueprint.route('/')
