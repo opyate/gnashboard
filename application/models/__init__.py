@@ -3,6 +3,7 @@ from flask.ext.sandboy import Sandboy
 from .foo import Foo
 from .basket import Basket
 from .page import Page
+from .kv import KV
 
 
 class APIScaffold(object):
@@ -10,6 +11,6 @@ class APIScaffold(object):
         decorators = [auth.login_required]
         sandboy = Sandboy(
             app, db,
-            [Foo, Basket, Page],
+            [Foo, Basket, Page, KV],
             decorators=decorators)
         return sandboy

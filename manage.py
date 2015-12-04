@@ -9,6 +9,7 @@ from application.settings import DevConfig, ProdConfig
 from application.models.foo import Foo
 from application.models.basket import Basket
 from application.models.page import Page
+from application.models.kv import KV
 from application.extensions import db
 
 if os.environ.get("APPLICATION_ENV") == 'prod':
@@ -31,7 +32,8 @@ def _make_context():
         'db': db,
         'Foo': Foo,
         'Basket': Basket,
-        'Page': Page
+        'Page': Page,
+        'KV': KV
     }
 
 
