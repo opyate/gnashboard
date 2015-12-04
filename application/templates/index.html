@@ -1,0 +1,34 @@
+{% extends "template.html" %}
+{% block content %}
+<h1>API</h1>
+
+<h2><a href="/">/</a></h2>
+
+<p>Root. This page.</p>
+
+<h2><a href="/kv">/kv</a></h2>
+
+<p>Key-value store.
+Supports <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>.</p>
+
+<h2><a href="/latest/kv">/latest/kv</a></h2>
+
+<p>Read-only alternative API for Key-value store.</p>
+
+<h2><a href="/latest/kv/%7Bkey%7D">/latest/kv/{key}</a></h2>
+
+<p>Same as above, by <code>key</code>.</p>
+
+<h2><a href="/page">/page</a></h2>
+
+<p>Page store.
+Supports <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>.</p>
+
+<h2><a href="/latest/page">/latest/page</a></h2>
+
+<p>Read-only alternative API for Page store.</p>
+
+<h2><a href="/latest/page/%7Bname%7D">/latest/page/{name}</a></h2>
+
+<p>Same as above, by <code>name</code>.</p>
+{% endblock %}

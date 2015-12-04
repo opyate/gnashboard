@@ -8,7 +8,8 @@ from flask import (
     request,
     jsonify,
     abort,
-    current_app
+    current_app,
+    render_template,
 )
 import os
 from ..extensions import auth, db
@@ -16,8 +17,12 @@ from ..extensions import auth, db
 
 blueprint = Blueprint(
     'misc',
-    __name__)
+    __name__,
+    template_folder='templates')
 
+@blueprint.route('/')
+def index():
+    return render_template('index.html')
 
 @blueprint.route('/health')
 def health():
