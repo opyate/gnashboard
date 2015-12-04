@@ -1,7 +1,7 @@
 from flask import (
     Blueprint,
 )
-from ..extensions import auth
+from ..extensions import auth, db
 from ..models.page import Page
 
 
@@ -10,10 +10,16 @@ blueprint = Blueprint(
     __name__,
     template_folder='templates')
 
+TMPL = "<li><a href='/pages/{0}'>{0}</a></li>"
 
 @blueprint.route('/pages')
+def pages():
+    query = db.session.query(Page.name.distinct().label("name"))
+    names = [TMPL.format(row.name) for row in query.all()]
+    return "".join(names), 200
+
 @blueprint.route('/pages/<string:name>')
-def index(name=None):
+def page_by_name(name=None):
     if name:
         page = Page.query \
                    .filter_by(name=name) \
