@@ -35,7 +35,7 @@ def get_page_by_name(name=None):
             # TODO fix the newline issue
             _html = page.html
             html = _html.replace('\\012','\n')
-            return Response(html, mimetype='text/html')
+            return html, 200
     return "<p>No page here</p>", 404
 
 @blueprint.route('/<string:name>', methods=['POST'])
