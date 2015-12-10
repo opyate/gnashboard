@@ -34,7 +34,7 @@ def get_page_by_name(name=None):
         if page:
             # TODO fix the newline issue
             _html = page.html
-            html = _html.replace('\\012','')
+            html = _html.replace('\\012','\n')
             return Response(html, mimetype='text/html')
     return "<p>No page here</p>", 404
 
