@@ -2,6 +2,7 @@ from flask import (
     Blueprint,
     request,
     jsonify,
+    Response,
 )
 from ..extensions import auth, db
 from ..models.page import Page
@@ -31,7 +32,10 @@ def get_page_by_name(name=None):
                    .order_by(Page.created_ts.desc()) \
                    .limit(1).first()
         if page:
-            return page.html, 200
+            # TODO fix the newline issue
+            _html = page.html
+            html = _html.replace('\\012','')
+            return Response(html, mimetype='text/html')
     return "<p>No page here</p>", 404
 
 @blueprint.route('/<string:name>', methods=['POST'])
