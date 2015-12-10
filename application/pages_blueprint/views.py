@@ -1,5 +1,7 @@
 from flask import (
     Blueprint,
+    request,
+    jsonify,
 )
 from ..extensions import auth, db
 from ..models.page import Page
@@ -21,8 +23,8 @@ def pages():
     names = [TMPL.format(ROOT, row.name) for row in query.all()]
     return "".join(names), 200
 
-@blueprint.route('/<string:name>')
-def page_by_name(name=None):
+@blueprint.route('/<string:name>', methods=['GET'])
+def get_page_by_name(name=None):
     if name:
         page = Page.query \
                    .filter_by(name=name) \
@@ -30,4 +32,15 @@ def page_by_name(name=None):
                    .limit(1).first()
         if page:
             return page.html, 200
+    return "<p>No page here</p>", 404
+
+@blueprint.route('/<string:name>', methods=['POST'])
+def post_page_by_name(name=None):
+    if name:
+        html = request.files['html']
+        if html:
+            page = Page(name=name, html=html.read())
+            db.session.add(page)
+            db.session.commit()
+            return 'Created', 201
     return "<p>No page here</p>", 404

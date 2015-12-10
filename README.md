@@ -108,3 +108,7 @@ Read-only alternative API for Page store.
 ## [/latest/page/{name}](http://localhost:5000/latest/page/{name})
 
 Same as above, by `name`.
+
+Or, post an HTML file to a named endpoint:
+
+    curl http://localhost:5000/latest/page/foo -F html=@yourfile.html
