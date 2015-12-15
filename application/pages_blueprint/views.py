@@ -32,10 +32,7 @@ def get_page_by_name(name=None):
                    .order_by(Page.created_ts.desc()) \
                    .limit(1).first()
         if page:
-            # TODO fix the newline issue
-            _html = page.html
-            html = _html.replace('\\012','\n')
-            return html, 200
+            return page.html, 200
     return "<p>No page here</p>", 404
 
 @blueprint.route('/<string:name>', methods=['POST'])
@@ -43,7 +40,7 @@ def post_page_by_name(name=None):
     if name:
         html = request.files['html']
         if html:
-            page = Page(name=name, html=html.read())
+            page = Page(name=name, html=html.read().decode('utf-8'))
             db.session.add(page)
             db.session.commit()
             return 'Created', 201
