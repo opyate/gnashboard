@@ -1,6 +1,7 @@
 from flask import (
     Blueprint,
     jsonify,
+    request,
 )
 from ..extensions import auth, db
 from ..models.kv import KV
@@ -19,13 +20,24 @@ def keys():
     keys = [{'key': row.key} for row in query.all()]
     return jsonify({'keys': keys}), 200
 
-@blueprint.route('/<string:name>')
-def by_key(name=None):
-    if name:
+@blueprint.route('/<string:key>', methods=['GET'])
+def get_kv_by_key(key=None):
+    if key:
         obj = KV.query \
-                   .filter_by(key=name) \
+                   .filter_by(key=key) \
                    .order_by(KV.created_ts.desc()) \
                    .limit(1).first()
         if obj:
             return jsonify(obj.value), 200
-    return jsonify({'msg': 'Not found', 'status_code': 404}), 404
+    return jsonify({'msg': 'Not found', 'status_code': 404, 'key': key}), 404
+
+@blueprint.route('/<string:key>', methods=['POST'])
+def post_kv_by_key(key=None):
+    if key:
+        json = request.get_json(force=True)
+        if json:
+            kv = KV(key=key, value=json)
+            db.session.add(kv)
+            db.session.commit()
+            return jsonify({'msg': 'Created', 'status_code': 201, 'key': key}), 201
+    return jsonify({'msg': 'Not found', 'status_code': 404, 'key': key}), 404
