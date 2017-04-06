@@ -46,6 +46,8 @@ And finally, here's the backend developer's version of a pretty welcome screen:
 
 In your production environment, make sure the ``APPLICATION_ENV`` environment variable is set to ``"prod"``.
 
+The app uses Basic Auth, so set `HTTP_BASICAUTH_USERNAME` and `HTTP_BASICAUTH_PASSWORD` in the environment.
+
 ## Shell
 
 To open the interactive shell, run
