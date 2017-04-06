@@ -1,6 +1,6 @@
 # à la tableau de bord
 
-[![Build Status](https://travis-ci.org/opyate/application/.svg)](https://travis-ci.org/opyate/application)
+[![Build Status](https://travis-ci.org/opyate/gnashboard/.svg)](https://travis-ci.org/opyate/gnashboard)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
