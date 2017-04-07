@@ -7,13 +7,12 @@ from logging.config import fileConfig
 # add ../ to the path. This is a horrid, horrid thing I do, and I
 # blame both python and alembic.
 import sys
-import os.path
+import os
 sys.path.append(
     os.path.abspath(
         os.path.join(os.path.dirname(__file__),
                      os.path.pardir)))
 
-from config import config as app_config
 from app.db import db
 
 # this is the Alembic Config object, which provides
@@ -21,8 +20,7 @@ from app.db import db
 config = context.config
 
 # Override db connection with our global flask_app config's
-config.set_main_option("sqlalchemy.url",
-                       app_config.database_connection_string())
+config.set_main_option("sqlalchemy.url", os.environ['DATABASE_URL'])
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
