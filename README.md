@@ -10,36 +10,35 @@ Dashing stuff.
 
 ## Quickstart
 
-First, set your app's secret key as an environment variable. For example, example add the following to ```.bashrc``` or ```.bash_profile```.
+Run the following commands to bootstrap your environment.
+
+    git clone https://github.com/opyate/gnashboard
+    cd gnashboard
+    pip install -r requirements/dev.txt
+    createdb  -h localhost -p 5432 -U postgres myownlittlestorage
 
     export APPLICATION_SECRET='something-really-secret'
-
-
-Then run the following commands to bootstrap your environment.
-
-    git clone https://github.com/opyate/application
-    cd application
-    pip install -r requirements/dev.txt
-    python manage.py server
-
-Once you have installed your DBMS, run the following to create your app's database tables and perform the initial migration:
-
-    python manage.py db init
-    python manage.py db migrate
+    export DATABASE_URL=postgres://postgres@localhost:5432/myownlittlestorage
+    export HTTP_BASICAUTH_USERNAME=admin
+    export HTTP_BASICAUTH_PASSWORD=password
     python manage.py db upgrade
     python manage.py server
 
-And finally, here's the backend developer's version of a pretty welcome screen:
 
-    # create a foo
+A quick test:
+
+    # create
     curl -X POST \
-    -H 'Content-Type: application/json' \
-    http://localhost:3000/foo \
-    -d '{"bar":42}'
-    # read it back
+      --user $HTTP_BASICAUTH_USERNAME:$HTTP_BASICAUTH_PASSWORD \
+      -H 'Content-Type: application/json' \
+      http://localhost:5000/kv \
+      -d '{"key":"this-is-the-key", "value":{"this-is":"the-value"}}'
+
+    # read
     curl -X GET \
-    -H 'Accept: application/json' \
-    http://localhost:3000/foo
+      --user $HTTP_BASICAUTH_USERNAME:$HTTP_BASICAUTH_PASSWORD \
+      -H 'Content-Type: application/json' \
+      http://localhost:5000/latest/kv/this-is-the-key
 
 
 ## Deployment
