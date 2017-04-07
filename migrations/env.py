@@ -13,7 +13,7 @@ sys.path.append(
         os.path.join(os.path.dirname(__file__),
                      os.path.pardir)))
 
-from app.db import db
+from ..app.db import db
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
